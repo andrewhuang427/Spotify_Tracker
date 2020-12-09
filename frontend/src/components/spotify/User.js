@@ -28,6 +28,7 @@ function User() {
   useEffect(() => {
     const fetchUser = async () => {
       const user = await getUser();
+      console.log(user.data);
       setUser(user.data);
     };
     fetchUser();

@@ -15,6 +15,14 @@ export const getUser = () => {
   return axios.get("https://api.spotify.com/v1/me", { headers });
 };
 
+let USER_ID = "";
+const getUserId = async () => {
+  const user = await getUser();
+  console.log(user);
+  USER_ID = user.data.id;
+};
+getUserId();
+
 export const getPlaylists = () => {
   return axios.get("https://api.spotify.com/v1/me/playlists", { headers });
 };
@@ -43,6 +51,53 @@ export const getTopArtists = (term) => {
     };
     url += "?" + querystring.stringify(params);
   }
+
+  return axios.get(url, { headers });
+};
+
+export const createPlaylist = (term) => {
+  let url = `https://api.spotify.com/v1/users/${USER_ID}/playlists`;
+
+  let playlistName = "Your Top Tracks";
+
+  if (term === "short_term") {
+    playlistName += " (Last Month)";
+  } else if (term === "medium_term") {
+    playlistName += " (Past 6 Months)";
+  } else {
+    playlistName += " (All Time)";
+  }
+  console.log(url);
+
+  const data = {
+    name: playlistName,
+    public: true,
+    description: "Compilation of your Top Songs by Spotify Profile Tracker App",
+  };
+
+  return axios.post(url, JSON.stringify(data), { headers });
+};
+
+export const addSongsToPlaylist = (playlistId, tracks) => {
+  let url = `https://api.spotify.com/v1/playlists/${playlistId}/tracks`;
+
+  const trackList = [];
+
+  tracks.forEach((track) => {
+    let trackId = track.id;
+    let str = "spotify:track:" + trackId;
+    trackList.push(str);
+  });
+
+  const data = {
+    uris: trackList,
+  };
+
+  return axios.post(url, JSON.stringify(data), { headers });
+};
+
+export const getPlaylist = (playlistId) => {
+  let url = `https://api.spotify.com/v1/playlists/${playlistId}`;
 
   return axios.get(url, { headers });
 };

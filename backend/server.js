@@ -18,7 +18,8 @@ app.use(cors());
 let storedState = "";
 
 app.get("/login", function (req, res) {
-  const scopes = "user-read-private user-read-email user-top-read";
+  const scopes =
+    "user-read-private user-read-email user-top-read playlist-modify-private playlist-modify-public";
   const stateString = generateRandomStateString(25);
   storedState = stateString;
 

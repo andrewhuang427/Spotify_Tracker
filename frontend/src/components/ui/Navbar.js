@@ -46,11 +46,6 @@ const NavbarLink = styled.a`
   text-decoration: none;
   padding: 10px;
   border-radius: 5px;
-
-  &:hover {
-    border: 3px solid #1db954;
-    transition: 0.5s;
-  }
 `;
 
 const NavbarButton = styled.a`

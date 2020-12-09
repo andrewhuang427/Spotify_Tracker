@@ -14,9 +14,9 @@ export const NavbarData = [
     path: "/",
     redirect: false,
   },
-  {
-    title: "Log Out",
-    path: "/logout",
-    redirect: true,
-  },
+  // {
+  //   title: "Log Out",
+  //   path: "/logout",
+  //   redirect: true,
+  // },
 ];
