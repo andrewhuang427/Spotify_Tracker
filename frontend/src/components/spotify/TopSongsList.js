@@ -11,22 +11,6 @@ const ComponentContainer = styled.div`
 
 const List = styled.ul`
   overflow-x: hidden;
-
-  &::-webkit-scrollbar-track {
-    -webkit-box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.3);
-    background-color: rgb(0, 0, 0);
-  }
-
-  &::-webkit-scrollbar {
-    width: 12px;
-    background-color: rgb(255, 255, 255);
-  }
-
-  &::-webkit-scrollbar-thumb {
-    border-radius: 10px;
-    -webkit-box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.3);
-    background: rgb(255, 255, 255, 0.3);
-  }
 `;
 
 const ListItem = styled.li`
@@ -91,11 +75,11 @@ const Right = styled.div`
 `;
 
 const PlaySongLink = styled.a`
-  color: #e4e4e4;
+  color: black;
   text-align: center;
   padding: 10px 20px;
   background: #1db954;
-  border-radius: 5px;
+  border-radius: 10px;
   text-decoration: none;
   font-size: 15px;
   position: relative;
@@ -149,9 +133,9 @@ function TopSongsList({ topSongs }) {
                           song.artists[index + 1] ? ", " : ""
                         }`;
                       })}
-                      {" | Popularity Score: "}
+                      {" • Popularity Score: "}
                       {song.popularity}
-                      {" | Duration: "}
+                      {" • Duration: "}
                       {msToMinutes(song.duration_ms)}
                     </ArtistsHeading>
                   </TitleAndArtists>

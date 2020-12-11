@@ -32,13 +32,13 @@ const IconsList = styled.ul`
   font-size: 60px;
 
   svg {
-    padding 10px;
+    padding: 10px;
     border-radius: 50%;
   }
 
   svg:hover {
     cursor: pointer;
-    background : rgba(255,255,255,0.3);
+    background: rgba(255, 255, 255, 0.3);
   }
 `;
 

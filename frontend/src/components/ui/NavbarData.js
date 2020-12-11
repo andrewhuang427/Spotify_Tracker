@@ -2,21 +2,17 @@ export const NavbarData = [
   {
     title: "Home",
     path: "/",
-    redirect: false,
   },
   {
-    title: "Top Songs",
-    path: "/",
-    redirect: false,
+    title: "Top Tracks",
+    path: "/tracks",
   },
   {
     title: "Top Artists",
-    path: "/",
-    redirect: false,
+    path: "/artists",
   },
-  // {
-  //   title: "Log Out",
-  //   path: "/logout",
-  //   redirect: true,
-  // },
+  {
+    title: "Log Out",
+    path: "/logout",
+  },
 ];

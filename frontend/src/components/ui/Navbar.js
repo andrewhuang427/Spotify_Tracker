@@ -1,7 +1,9 @@
-import React from "react";
+import React, { useState } from "react";
 import styled from "styled-components";
 import LogoImg from "../../images/Spotify_Logo.png";
 import { NavbarData } from "./NavbarData";
+import { Link } from "react-router-dom";
+import { FaBars } from "react-icons/fa";
 
 const Nav = styled.div`
   background-color: #303030;
@@ -28,6 +30,7 @@ const Logo = styled.img`
 `;
 
 const LogoText = styled.h2`
+  font-size: 18px;
   margin-left: 10px;
   color: white;
 `;
@@ -35,51 +38,91 @@ const LogoText = styled.h2`
 const NavbarLinks = styled.ul`
   display: grid;
   grid-template-columns: repeat(${NavbarData.length}, auto);
-  grid-gap: 30px;
+  grid-gap: 8px;
   list-style: none;
   text-align: center;
   align-items: center;
-`;
 
-const NavbarLink = styled.a`
-  color: #e4e4e4;
-  text-decoration: none;
-  padding: 10px;
-  border-radius: 5px;
-`;
-
-const NavbarButton = styled.a`
-  color: #e4e4e4;
-  text-decoration: none;
-  padding: 10px;
-  border-radius: 5px;
-  background-color: #1db954;
-  &:hover {
-    background-color: #1db9546c;
-    transition: 0.5s;
+  @media screen and (max-width: 900px) {
+    display: ${(props) => (props.isOpen ? "block" : "none")};
+    position: absolute;
+    top: 80px;
+    left: 0;
+    width: 100%;
+    background: #000000;
+    z-index: 9999;
+    padding: 20px;
   }
 `;
 
+const ListItem = styled.li`
+  border-radius: 5px;
+  padding: 5px 10px;
+  border: ${(props) => (props.isActive ? "3px solid #1db954" : "")};
+
+  @media screen and (max-width: 900px) {
+    display: flex;
+    justify-content: center;
+    margin: 10px auto;
+  }
+`;
+const NavLink = styled(Link)`
+  color: #e4e4e4;
+  display: flex;
+  text-align: center;
+  text-decoration: none;
+  padding: 0 1rem;
+  height: 100%;
+  cursor: pointer;
+`;
+
+const Bars = styled(FaBars)`
+  display: none;
+  color: #e4e4e4;
+
+  &:hover {
+    color: #e4e4e4aa
+  }
+  @media screen and (max-width: 900px) {
+    display: block;
+    position: absolute;
+    top: 0;
+    right: 0;
+    transform: translate(-100%, 75%);
+    font-size: 1.8rem;
+    cursor: pointer;
+  }
+
+`;
+
 function Navbar() {
+  const [currentPage, setCurrentPage] = useState("Home");
+  const [isOpen, setOpen] = useState(false);
+
+  const toggleSidebar = () => {
+    setOpen(!isOpen);
+  };
   return (
     <Nav>
       <LogoContainer>
         <Logo src={LogoImg} alt="Spotify Logo" />
         <LogoText>| Profile Tracker</LogoText>
       </LogoContainer>
-      <NavbarLinks>
+      <NavbarLinks isOpen={isOpen} onClick={toggleSidebar}>
         {NavbarData.map((item, index) => {
           return (
-            <li key={index}>
-              {item.redirect ? (
-                <NavbarButton href={item.path}>{item.title}</NavbarButton>
-              ) : (
-                <NavbarLink href={item.path}>{item.title}</NavbarLink>
-              )}
-            </li>
+            <ListItem isActive={currentPage === item.title} key={index}>
+              <NavLink
+                to={item.path}
+                onClick={() => setCurrentPage(item.title)}
+              >
+                {item.title}
+              </NavLink>
+            </ListItem>
           );
         })}
       </NavbarLinks>
+      <Bars onClick={toggleSidebar} />
     </Nav>
   );
 }

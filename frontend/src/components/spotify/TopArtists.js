@@ -3,6 +3,7 @@ import { getTopArtists } from "../../api/index";
 import ArtistsGrid from "./ArtistsGrid";
 import styled from "styled-components";
 import { FaAngleRight, FaAngleLeft } from "react-icons/fa";
+import ProgressBar from "../ui/ProgressBar";
 import { AnimatedButton } from "../styled-components/AnimatedButton";
 import { SectionHeading } from "../styled-components/Headings";
 import { ButtonContainer } from "../styled-components/Containers";
@@ -24,13 +25,13 @@ const ToggleButton = styled.button`
   margin: 0 10px;
 
   svg {
-    padding 10px;
+    padding: 10px;
     border-radius: 50%;
   }
 
   svg:hover {
     cursor: pointer;
-    background : rgba(255,255,255,0.2);
+    background: rgba(255, 255, 255, 0.2);
     transition: 0.5s;
   }
 `;
@@ -64,6 +65,16 @@ function TopArtists() {
     );
     return sorted;
   };
+
+  const getAveragePopularity = (artists) => {
+    let sum = 0;
+    artists.map((artist) => {
+      return (sum += artist.popularity);
+    });
+    return sum / artists.length;
+  };
+
+  const averagePopularity = getAveragePopularity(Artists);
 
   useEffect(() => {
     const fetchArtists = async () => {
@@ -127,6 +138,11 @@ function TopArtists() {
               <FaAngleRight />
             </Next>
           </ButtonContainer>
+          <div
+            style={{ width: "90%", marginRight: "auto", marginLeft: "auto" }}
+          >
+            <ProgressBar averagePopularity={averagePopularity}></ProgressBar>
+          </div>
           <ArtistsGrid
             Artists={Artists.slice(current, current + 10)}
             current={current}

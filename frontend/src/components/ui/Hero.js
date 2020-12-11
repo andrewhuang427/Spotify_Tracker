@@ -29,6 +29,10 @@ const WelcomeContainer = styled.div`
   flex-grow: 1;
   max-width: 50%;
   height: 450px;
+
+  @media screen and (max-width: 900px) {
+    max-width: 100%;
+  }
 `;
 
 const WelcomeHeading = styled.h3`
@@ -41,7 +45,10 @@ const SubtitleHeader = styled.h1`
   color: #1db954;
   font-size: 60px;
   margin-bottom: 20px;
-  background-color: #1dg954;
+
+  @media screen and (max-width: 900px) {
+    font-size: 50px;
+  }
 `;
 const WelcomeDescription = styled.p``;
 
@@ -75,16 +82,16 @@ function Header() {
               </WelcomeDescription>
             </div>
           </WelcomeContainer>
-          <Profile>
+          {/* <Profile>
             <User />
-          </Profile>
+          </Profile> */}
         </ContentWrapper>
       </HeroContent>
       <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1440 320">
         <path
           fill="#000000"
           fillOpacity="1"
-          d="M0,32L60,37.3C120,43,240,53,360,74.7C480,96,600,128,720,154.7C840,181,960,203,1080,186.7C1200,171,1320,117,1380,90.7L1440,64L1440,0L1380,0C1320,0,1200,0,1080,0C960,0,840,0,720,0C600,0,480,0,360,0C240,0,120,0,60,0L0,0Z"
+          d="M0,128L60,149.3C120,171,240,213,360,213.3C480,213,600,171,720,138.7C840,107,960,85,1080,74.7C1200,64,1320,64,1380,64L1440,64L1440,0L1380,0C1320,0,1200,0,1080,0C960,0,840,0,720,0C600,0,480,0,360,0C240,0,120,0,60,0L0,0Z"
         ></path>
       </svg>
     </HeroContainer>

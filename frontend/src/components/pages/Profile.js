@@ -1,19 +1,29 @@
 import React from "react";
+import { BrowserRouter as Router, Switch, Route, Link } from "react-router-dom";
 import Navbar from "../ui/Navbar";
-import Hero from "../ui/Hero";
-import Footer from "../ui/Footer";
-import TopSongs from "../spotify/TopSongs";
-import TopArtists from "../spotify/TopArtists";
+import Home from "./Home";
+import Tracks from "./Tracks";
+import Artists from "./Artists";
 
 function Profile() {
   return (
-    <>
-      <Navbar />
-      <Hero />
-      <TopSongs />
-      <TopArtists />
-      <Footer />
-    </>
+    <Router>
+      <div>
+        <Navbar/>
+
+        <Switch>
+          <Route exact path="/tracks">
+            <Tracks />
+          </Route>
+          <Route exact path="/artists">
+            <Artists />
+          </Route>
+          <Route path="/">
+            <Home />
+          </Route>
+        </Switch>
+      </div>
+    </Router>
   );
 }
 

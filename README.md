@@ -24,5 +24,4 @@
 
 ### Creative Portion (10 points)
 
-- Filter top songs by time
-- Used axios to perform fetch requests
+1. Users can create playlist from the application using their top songs

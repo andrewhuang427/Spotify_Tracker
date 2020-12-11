@@ -29,8 +29,8 @@ body::-webkit-scrollbar-thumb {
 :root {
   --light: linear-gradient(
     90deg,
-    rgb(107, 225, 255) 0%,
-    rgb(117, 92, 255) 100%
+    rgb(0, 218, 153) 0%,
+    rgb(30, 101, 255) 100%
   );
   --dark: linear-gradient(90deg, #4896aa 0%, #5444b1 100%);
   --card: #3c3c3c4d;
