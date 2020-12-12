@@ -7,6 +7,7 @@ import { FaBars } from "react-icons/fa";
 
 const Nav = styled.div`
   background-color: #303030;
+  border-bottom: 1px solid #555555;
   position: fixed;
   top: 0;
   left: 0;
@@ -52,22 +53,23 @@ const NavbarLinks = styled.ul`
     background: #000000;
     z-index: 9999;
     padding: 20px;
+    border-bottom: 1px solid #555555;
   }
 `;
 
 const ListItem = styled.li`
-  border-radius: 5px;
   padding: 5px 10px;
-  border: ${(props) => (props.isActive ? "3px solid #1db954" : "")};
+  border-bottom: ${(props) => (props.isActive ? "3px solid #1db954" : "")};
 
   @media screen and (max-width: 900px) {
     display: flex;
     justify-content: center;
     margin: 10px auto;
+    border-bottom: none;
   }
 `;
 const NavLink = styled(Link)`
-  color: #e4e4e4;
+  color: ${(props) => (props.isActive ? "#1db954" : "#e4e4e4")};
   display: flex;
   text-align: center;
   text-decoration: none;
@@ -81,7 +83,7 @@ const Bars = styled(FaBars)`
   color: #e4e4e4;
 
   &:hover {
-    color: #e4e4e4aa
+    color: #e4e4e4aa;
   }
   @media screen and (max-width: 900px) {
     display: block;
@@ -92,7 +94,6 @@ const Bars = styled(FaBars)`
     font-size: 1.8rem;
     cursor: pointer;
   }
-
 `;
 
 function Navbar() {
@@ -114,6 +115,8 @@ function Navbar() {
             <ListItem isActive={currentPage === item.title} key={index}>
               <NavLink
                 to={item.path}
+                isActive={currentPage === item.title}
+                key={index}
                 onClick={() => setCurrentPage(item.title)}
               >
                 {item.title}

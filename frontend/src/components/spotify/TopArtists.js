@@ -3,10 +3,12 @@ import { getTopArtists } from "../../api/index";
 import ArtistsGrid from "./ArtistsGrid";
 import styled from "styled-components";
 import { FaAngleRight, FaAngleLeft } from "react-icons/fa";
-import ProgressBar from "../ui/ProgressBar";
 import { AnimatedButton } from "../styled-components/AnimatedButton";
 import { SectionHeading } from "../styled-components/Headings";
-import { ButtonContainer } from "../styled-components/Containers";
+import {
+  FlexContainer,
+  ButtonContainer,
+} from "../styled-components/Containers";
 
 const TopArtistsContainer = styled.div`
   display: flex;
@@ -27,6 +29,7 @@ const ToggleButton = styled.button`
   svg {
     padding: 10px;
     border-radius: 50%;
+    background: rgba(255, 255, 255, 0.1);
   }
 
   svg:hover {
@@ -44,6 +47,8 @@ function TopArtists() {
   const [Artists, setArtists] = useState([]);
   const [term, setTerm] = useState("short_term");
   const [current, setCurrent] = useState(0);
+
+  const numCards = 10;
 
   const getTopGenres = (artists) => {
     let genres = {};
@@ -66,20 +71,9 @@ function TopArtists() {
     return sorted;
   };
 
-  const getAveragePopularity = (artists) => {
-    let sum = 0;
-    artists.map((artist) => {
-      return (sum += artist.popularity);
-    });
-    return sum / artists.length;
-  };
-
-  const averagePopularity = getAveragePopularity(Artists);
-
   useEffect(() => {
     const fetchArtists = async () => {
       const response = await getTopArtists(term);
-      console.log(response.data.items);
       setArtists(response.data.items);
     };
     fetchArtists();
@@ -88,63 +82,60 @@ function TopArtists() {
     <>
       <TopArtistsContainer>
         <div>
-          <SectionHeading>Your Top Artists and Genres</SectionHeading>
-          <ButtonContainer>
-            <AnimatedButton
-              isActive={term === "short_term"}
-              className={term === "short_term" ? "active" : ""}
-              onClick={() => {
-                setTerm("short_term");
-              }}
-            >
-              Last Month
-            </AnimatedButton>
-            <AnimatedButton
-              isActive={term === "medium_term"}
-              className={term === "medium_term" ? "active" : ""}
-              onClick={() => {
-                setTerm("medium_term");
-              }}
-            >
-              Last 6 Months
-            </AnimatedButton>
-            <AnimatedButton
-              isActive={term === "long_term"}
-              className={term === "long_term" ? "active" : ""}
-              onClick={() => {
-                setTerm("long_term");
-              }}
-            >
-              All Time
-            </AnimatedButton>
-          </ButtonContainer>
-          <ButtonContainer>
-            <Previous
-              onClick={() => {
-                if (current - 10 >= 0) {
-                  setCurrent(current - 10);
-                }
-              }}
-            >
-              <FaAngleLeft />
-            </Previous>
-            <Next
-              onClick={() => {
-                if (current + 10 <= Artists.length - 1) {
-                  setCurrent(current + 10);
-                }
-              }}
-            >
-              <FaAngleRight />
-            </Next>
-          </ButtonContainer>
-          <div
-            style={{ width: "90%", marginRight: "auto", marginLeft: "auto" }}
-          >
-            <ProgressBar averagePopularity={averagePopularity}></ProgressBar>
-          </div>
+          <FlexContainer style={{ margin: "30px 50px" }}>
+            <SectionHeading>Your Top Artists and Genres</SectionHeading>
+            <ButtonContainer style={{ marginTop: "10px" }}>
+              <Previous
+                onClick={() => {
+                  if (current - numCards >= 0) {
+                    setCurrent(current - numCards);
+                  }
+                }}
+              >
+                <FaAngleLeft />
+              </Previous>
+              <Next
+                onClick={() => {
+                  if (current + numCards <= Artists.length - numCards) {
+                    setCurrent(current + numCards);
+                  }
+                }}
+              >
+                <FaAngleRight />
+              </Next>
+            </ButtonContainer>
+            <ButtonContainer>
+              <AnimatedButton
+                isActive={term === "short_term"}
+                className={term === "short_term" ? "active" : ""}
+                onClick={() => {
+                  setTerm("short_term");
+                }}
+              >
+                Last Month
+              </AnimatedButton>
+              <AnimatedButton
+                isActive={term === "medium_term"}
+                className={term === "medium_term" ? "active" : ""}
+                onClick={() => {
+                  setTerm("medium_term");
+                }}
+              >
+                Last 6 Months
+              </AnimatedButton>
+              <AnimatedButton
+                isActive={term === "long_term"}
+                className={term === "long_term" ? "active" : ""}
+                onClick={() => {
+                  setTerm("long_term");
+                }}
+              >
+                All Time
+              </AnimatedButton>
+            </ButtonContainer>
+          </FlexContainer>
           <ArtistsGrid
-            Artists={Artists.slice(current, current + 10)}
+            Artists={Artists.slice(current, current + numCards)}
             current={current}
             TopGenres={getTopGenres(Artists)}
           />

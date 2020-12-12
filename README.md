@@ -5,7 +5,7 @@
 
 ### Languages/Frameworks used (30 points)
 10 - Learned/Used React.JS Framework <br />
-10 - Learned/Used Express/Node.JS Framework <br />
+10 - Learned/Used Express Framework <br />
 10 - Learned/Used Spotify API <br />
 
 ### Functionality (60 points)

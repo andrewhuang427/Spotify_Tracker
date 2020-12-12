@@ -1,5 +1,7 @@
 import React from "react";
 import styled from "styled-components";
+import { BsThreeDotsVertical } from "react-icons/bs";
+import { MdPlayCircleOutline } from "react-icons/md";
 
 const ComponentContainer = styled.div`
   background: #000000;
@@ -7,6 +9,10 @@ const ComponentContainer = styled.div`
   font-size: 10px;
   padding: 10px;
   border-radius: 20px;
+  @media (max-width: 900px) {
+    padding: 5px;
+  }
+  overflow: hidden;
 `;
 
 const List = styled.ul`
@@ -22,12 +28,15 @@ const SongAttributesContainer = styled.div`
   justify-content: space-between;
   margin: 10px 20px;
   padding: 10px;
-  height: 90px;
+  height: 85px;
   border-radius: 10px;
   background: rgb(60, 60, 60, 0.3);
 
   div {
     display: inline-block;
+  }
+  @media (max-width: 900px) {
+    margin: 10px;
   }
 `;
 
@@ -49,20 +58,21 @@ const RankHeading = styled.h1`
 
 const TitleAndArtists = styled.div`
   position: relative;
-  bottom: 10px;
+  bottom: 15px;
   left: 20px;
 `;
 
 const TitleHeading = styled.h1`
   font-size: 16px;
-  @media (max-width: 900px) {
+  @media (max-width: 768px) {
     font-size: 12px;
   }
 `;
 
 const ArtistsHeading = styled.h3`
   color: #777777;
-  @media (max-width: 900px) {
+  font-size: 14px;
+  @media (max-width: 768px) {
     font-size: 10px;
   }
 `;
@@ -75,36 +85,25 @@ const Right = styled.div`
 `;
 
 const PlaySongLink = styled.a`
-  color: black;
-  text-align: center;
-  padding: 10px 20px;
-  background: #1db954;
-  border-radius: 10px;
+  color: #777777;
   text-decoration: none;
-  font-size: 15px;
+  font-size: 35px;
   position: relative;
-  top: 20px;
-  right: 10px;
+  top: 10px;
+  right: 20px;
 
-  &:hover {
-    background: #1db954a0;
+  svg {
+    cursor: pointer;
+  }
+  svg:hover {
+    color: #e4e4e4;
   }
 
   @media (max-width: 900px) {
-    display: none;
+    right: 50px;
   }
 `;
 
-const msToMinutes = (timeInMilliseconds) => {
-  let ms = timeInMilliseconds;
-  ms = 1000 * Math.round(ms / 1000); // round to nearest second
-  var d = new Date(ms);
-  return (
-    d.getUTCMinutes() +
-    ":" +
-    `${d.getUTCSeconds() > 9 ? d.getUTCSeconds() : "0" + d.getUTCSeconds()}`
-  );
-};
 function TopSongsList({ topSongs }) {
   return (
     <ComponentContainer>
@@ -133,10 +132,6 @@ function TopSongsList({ topSongs }) {
                           song.artists[index + 1] ? ", " : ""
                         }`;
                       })}
-                      {" • Popularity Score: "}
-                      {song.popularity}
-                      {" • Duration: "}
-                      {msToMinutes(song.duration_ms)}
                     </ArtistsHeading>
                   </TitleAndArtists>
                 </Left>
@@ -145,7 +140,7 @@ function TopSongsList({ topSongs }) {
                     href={song.external_urls.spotify}
                     target="_blank"
                   >
-                    Play
+                    <MdPlayCircleOutline />
                   </PlaySongLink>
                 </Right>
               </SongAttributesContainer>

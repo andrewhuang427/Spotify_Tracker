@@ -22,19 +22,26 @@ const Container = styled.div`
   }
 `;
 
+const CreatePlaylistContainer = styled.div`
+  flex: 40%;
+  text-align: center;
+  @media screen and (max-width: 768px) {
+    text-align: left;
+  }
+`;
 const CreatePlaylist = styled.button`
   cursor: pointer;
   padding: 10px 20px;
   background: transparent;
   border-radius: 5px;
-  border: 3px solid #e4e4e4;
+  border: 1px solid #777777;
   color: #e4e4e4;
   outline: none;
   margin-top: 10px;
   font-size: 18px;
 
   &:hover {
-    background: #1db954;
+    background: #e4e4e411;
   }
 
   @media screen and (max-width: 768px) {
@@ -46,14 +53,16 @@ function Navbar({ Function }) {
     <FixedContainer>
       <Container>
         <div style={{ flex: "60%", textAlign: "left" }}>
-          <h2>Create a Playlist from your Top Tracks</h2>
+          <h2 style={{ marginBottom: "5px" }}>
+            Create a Playlist from your Top Tracks
+          </h2>
           <div style={{ fontSize: "12px", color: "#777777" }}>
             Use the your top tracks filtered down by 'Last Month', 'Last 6
             months', and 'All Time' to create a compiled playlist of your
             favorite tracks
           </div>
         </div>
-        <div style={{ flex: "40%", textAlign: "center" }}>
+        <CreatePlaylistContainer>
           <CreatePlaylist
             style={{}}
             onClick={() => {
@@ -62,7 +71,7 @@ function Navbar({ Function }) {
           >
             Create Playlist
           </CreatePlaylist>
-        </div>
+        </CreatePlaylistContainer>
       </Container>
     </FixedContainer>
   );

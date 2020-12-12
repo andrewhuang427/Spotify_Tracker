@@ -22,16 +22,7 @@ body::-webkit-scrollbar {
 
 body::-webkit-scrollbar-thumb {
   border-radius: 10px;
-  -webkit-box-shadow: inset 0 0 6px #0000004d;
+  -webkit-box-shadow: inset 0 0 6px #00030a;
   background: rgb(255, 255, 255, 0.3);
 }
 
-:root {
-  --light: linear-gradient(
-    90deg,
-    rgb(0, 218, 153) 0%,
-    rgb(30, 101, 255) 100%
-  );
-  --dark: linear-gradient(90deg, #4896aa 0%, #5444b1 100%);
-  --card: #3c3c3c4d;
-}

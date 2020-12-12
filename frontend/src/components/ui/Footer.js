@@ -1,10 +1,5 @@
 import React from "react";
 import styled from "styled-components";
-import {
-  AiFillGithub,
-  AiOutlineInstagram,
-  AiFillLinkedin,
-} from "react-icons/ai";
 
 const FooterContainer = styled.div`
   width: 100%;
@@ -15,34 +10,11 @@ const FooterDiv = styled.div`
   background-color: #000000;
   margin-top: -10px;
   text-align: center;
-  padding: 30px;
-`;
-
-const IconsListContainer = styled.div`
-  display: flex;
-  justify-content: center;
-`;
-const IconsList = styled.ul`
-  display: grid;
-  grid-template-columns: repeat(3, auto);
-  grid-gap: 20px;
-  list-style: none;
-  text-align: center;
-  align-items: center;
-  font-size: 60px;
-
-  svg {
-    padding: 10px;
-    border-radius: 50%;
-  }
-
-  svg:hover {
-    cursor: pointer;
-    background: rgba(255, 255, 255, 0.3);
-  }
+  padding-bottom: 30px;
 `;
 
 const FooterTextContainer = styled.div`
+  color: #777777;
   font-size: 10px;
 `;
 
@@ -57,21 +29,8 @@ function Footer() {
         ></path>
       </svg>
       <FooterDiv>
-        <IconsListContainer>
-          <IconsList>
-            <li>
-              <AiFillGithub />
-            </li>
-            <li>
-              <AiFillLinkedin />
-            </li>
-            <li>
-              <AiOutlineInstagram />
-            </li>
-          </IconsList>
-        </IconsListContainer>
         <FooterTextContainer>
-          Designed with care by Andrew Huang for CSE 330 @ WashU
+          Created by Andrew Huang for Rapid Prototyping and Design @ WashU
         </FooterTextContainer>
       </FooterDiv>
     </FooterContainer>

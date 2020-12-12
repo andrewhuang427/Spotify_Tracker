@@ -4,7 +4,7 @@ import TopArtists from "../spotify/TopArtists";
 import Footer from "../ui/Footer";
 
 const Main = styled.main`
-  margin-top: 100px;
+  margin-top: 80px;
 `;
 function Artists() {
   return (

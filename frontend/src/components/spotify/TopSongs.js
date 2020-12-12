@@ -13,7 +13,7 @@ import SubNav from "../ui/SubNav";
 import TopSongsList from "./TopSongsList";
 import { AnimatedButton } from "../styled-components/AnimatedButton";
 import { SectionHeading } from "../styled-components/Headings";
-import { ButtonContainer } from "../styled-components/Containers";
+import { FlexContainer } from "../styled-components/Containers";
 
 const Wrapper = styled.div`
   width: 80%;
@@ -28,6 +28,8 @@ const Wrapper = styled.div`
 `;
 
 const TopSongsContainer = styled.div``;
+
+const ButtonContainer = styled.div``;
 
 function TopSongs() {
   const [term, setTerm] = useState("short_term");
@@ -104,33 +106,35 @@ function TopSongs() {
       )}
       <Wrapper>
         <TopSongsContainer>
-          <SectionHeading>Your Top Tracks</SectionHeading>
-          <ButtonContainer>
-            <AnimatedButton
-              isActive={term === "short_term"}
-              onClick={() => {
-                setTerm("short_term");
-              }}
-            >
-              Last Month
-            </AnimatedButton>
-            <AnimatedButton
-              isActive={term === "medium_term"}
-              onClick={() => {
-                setTerm("medium_term");
-              }}
-            >
-              Last 6 Months
-            </AnimatedButton>
-            <AnimatedButton
-              isActive={term === "long_term"}
-              onClick={() => {
-                setTerm("long_term");
-              }}
-            >
-              All Time
-            </AnimatedButton>
-          </ButtonContainer>
+          <FlexContainer>
+            <SectionHeading>Your Top Tracks</SectionHeading>
+            <ButtonContainer>
+              <AnimatedButton
+                isActive={term === "short_term"}
+                onClick={() => {
+                  setTerm("short_term");
+                }}
+              >
+                Last Month
+              </AnimatedButton>
+              <AnimatedButton
+                isActive={term === "medium_term"}
+                onClick={() => {
+                  setTerm("medium_term");
+                }}
+              >
+                Last 6 Months
+              </AnimatedButton>
+              <AnimatedButton
+                isActive={term === "long_term"}
+                onClick={() => {
+                  setTerm("long_term");
+                }}
+              >
+                All Time
+              </AnimatedButton>
+            </ButtonContainer>
+          </FlexContainer>
           <ProgressBar averagePopularity={averagePopularity} />
           <TopSongsList topSongs={topSongs} />
         </TopSongsContainer>
