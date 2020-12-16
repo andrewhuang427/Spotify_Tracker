@@ -1,39 +1,46 @@
 import React, { useState, useEffect } from "react";
 import styled from "styled-components";
 import { FaUserCircle } from "react-icons/fa";
-import { getUser } from "../../api/index";
 
 const UserContainer = styled.div`
+  position: relative;
   display: flex;
   align-items: center;
-  justify-content-center
+  justify-content: center;
   width: 100%;
   height: 100%;
   padding: 20px;
 `;
 
 const ProfileImageContainer = styled.div`
+  display: flex;
+  justify-content: center;
   svg {
     font-size: 150px;
   }
 `;
 
-const ProfileHeading = styled.h4`
-  margin: 10px auto;
+const ProfileImage = styled.img`
+  width: 300px;
+  object-fit: contain;
+  border-radius: 50%;
 `;
 
-function User() {
-  const [user, setUser] = useState([]);
+const ProfileDetailsContainer = styled.div`
+  padding: 10px;
+`;
 
-  useEffect(() => {
-    const fetchUser = async () => {
-      const user = await getUser();
-      console.log(user.data);
-      setUser(user.data);
-    };
-    fetchUser();
-  }, []);
+const ProfileHeading = styled.h4`
+  color: #e4e4e4;
+  display: inline-block;
+  margin: 5px;
+  padding: 5px;
+  background: black;
+  border-radius: 5px;
+  font-size: 15px;
+`;
 
+function User({ user }) {
   return (
     <UserContainer>
       <div>
@@ -41,16 +48,18 @@ function User() {
           {user.images === undefined || user.images.length === 0 ? (
             <FaUserCircle />
           ) : (
-            "Image Available..."
+            <ProfileImage src={user.images[0].url}></ProfileImage>
           )}
         </ProfileImageContainer>
-        <ProfileHeading>User: {user.display_name}</ProfileHeading>
-        <ProfileHeading>Country: {user.country}</ProfileHeading>
-        <ProfileHeading>Account Type: {user.product}</ProfileHeading>
-        <ProfileHeading>
-          Followers:{" "}
-          {user.followers !== undefined ? user.followers.total : "None"}
-        </ProfileHeading>
+        <ProfileDetailsContainer>
+          <ProfileHeading>User: {user.display_name}</ProfileHeading>
+          <ProfileHeading>Country: {user.country}</ProfileHeading>
+          <ProfileHeading>Account Type: {user.product}</ProfileHeading>
+          <ProfileHeading>
+            Followers:{" "}
+            {user.followers !== undefined ? user.followers.total : "None"}
+          </ProfileHeading>
+        </ProfileDetailsContainer>
       </div>
     </UserContainer>
   );

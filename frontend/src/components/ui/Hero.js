@@ -1,14 +1,16 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import styled from "styled-components";
 import User from "../spotify/User";
+import { getUser } from "../../api/index";
 
 const HeroContainer = styled.div`
-  margin-top: 80px;
-  margin-bottom: -50px;
+  margin: 80px auto 30px auto;
+  /* margin-bottom: -50px; */
 `;
 
 const HeroContent = styled.div`
   display: flex;
+  padding: 50px 0;
   justify-content: center;
   background: #000000;
 `;
@@ -59,20 +61,34 @@ const Profile = styled.div`
   flex-basis: 0;
   flex-grow: 1;
   max-width: 50%;
-  height: 450px;
+  height: auto;
   margin: 60px 30px 40px 50px;
   background: rgb(60, 60, 60, 0.3);
   border-radius: 15%;
+
+  @media screen and (max-width: 900px) {
+    max-width: 100%;
+    margin: 10px;
+  }
 `;
 
-function Header() {
+function Hero() {
+  const [user, setUser] = useState([]);
+  useEffect(() => {
+    const fetchUser = async () => {
+      const user = await getUser();
+      console.log(user.data);
+      setUser(user.data);
+    };
+    fetchUser();
+  }, []);
   return (
     <HeroContainer>
       <HeroContent>
         <ContentWrapper>
           <WelcomeContainer>
             <div>
-              <WelcomeHeading>Welcome, ahuang2000</WelcomeHeading>
+              <WelcomeHeading>Welcome, {user.display_name}</WelcomeHeading>
               <WelcomeSubtitle>
                 <SubtitleHeader>Your Spotify Data Visualized</SubtitleHeader>
               </WelcomeSubtitle>
@@ -83,19 +99,12 @@ function Header() {
             </div>
           </WelcomeContainer>
           <Profile>
-            <User />
+            <User user={user} />
           </Profile>
         </ContentWrapper>
       </HeroContent>
-      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1440 320">
-        <path
-          fill="#000000"
-          fillOpacity="1"
-          d="M0,128L60,149.3C120,171,240,213,360,213.3C480,213,600,171,720,138.7C840,107,960,85,1080,74.7C1200,64,1320,64,1380,64L1440,64L1440,0L1380,0C1320,0,1200,0,1080,0C960,0,840,0,720,0C600,0,480,0,360,0C240,0,120,0,60,0L0,0Z"
-        ></path>
-      </svg>
     </HeroContainer>
   );
 }
 
-export default Header;
+export default Hero;

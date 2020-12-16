@@ -18,17 +18,24 @@ const TopArtistsContainer = styled.div`
   color: "#e4e4e4";
 `;
 
+const HeadingContainer = styled.div`
+  display: flex;
+  @media screen and (max-width: 1075px) {
+    display: block;
+  }
+`;
+
 const ToggleButton = styled.button`
   color: #e4e4e4;
-  font-size: 50px;
+  font-size: 40px;
   background: transparent;
   outline: none;
   border: none;
-  margin: 0 10px;
+  margin: 0 5px;
 
   svg {
     padding: 10px;
-    border-radius: 50%;
+    border-radius: 10px;
     background: rgba(255, 255, 255, 0.1);
   }
 
@@ -83,27 +90,29 @@ function TopArtists() {
       <TopArtistsContainer>
         <div>
           <FlexContainer style={{ margin: "30px 50px" }}>
-            <SectionHeading>Your Top Artists and Genres</SectionHeading>
-            <ButtonContainer style={{ marginTop: "10px" }}>
-              <Previous
-                onClick={() => {
-                  if (current - numCards >= 0) {
-                    setCurrent(current - numCards);
-                  }
-                }}
-              >
-                <FaAngleLeft />
-              </Previous>
-              <Next
-                onClick={() => {
-                  if (current + numCards <= Artists.length - numCards) {
-                    setCurrent(current + numCards);
-                  }
-                }}
-              >
-                <FaAngleRight />
-              </Next>
-            </ButtonContainer>
+            <HeadingContainer>
+              <SectionHeading>Your Top Artists and Genres</SectionHeading>
+              <ButtonContainer style={{ marginTop: "10px" }}>
+                <Previous
+                  onClick={() => {
+                    if (current - numCards >= 0) {
+                      setCurrent(current - numCards);
+                    }
+                  }}
+                >
+                  <FaAngleLeft />
+                </Previous>
+                <Next
+                  onClick={() => {
+                    if (current + numCards <= Artists.length - numCards) {
+                      setCurrent(current + numCards);
+                    }
+                  }}
+                >
+                  <FaAngleRight />
+                </Next>
+              </ButtonContainer>
+            </HeadingContainer>
             <ButtonContainer>
               <AnimatedButton
                 isActive={term === "short_term"}

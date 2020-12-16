@@ -1,6 +1,5 @@
 import React from "react";
 import styled from "styled-components";
-import { BsThreeDotsVertical } from "react-icons/bs";
 import { MdPlayCircleOutline } from "react-icons/md";
 
 const ComponentContainer = styled.div`
@@ -139,6 +138,7 @@ function TopSongsList({ topSongs }) {
                   <PlaySongLink
                     href={song.external_urls.spotify}
                     target="_blank"
+                    rel="noreferrer"
                   >
                     <MdPlayCircleOutline />
                   </PlaySongLink>

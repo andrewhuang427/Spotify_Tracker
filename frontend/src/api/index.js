@@ -9,8 +9,6 @@ const headers = {
   "Content-Type": "application/json",
 };
 
-console.log(tokens.access_token);
-
 export const getUser = () => {
   return axios.get("https://api.spotify.com/v1/me", { headers });
 };
@@ -24,6 +22,7 @@ const getUserId = async () => {
 getUserId();
 
 export const getPlaylists = () => {
+  console.log("getting playlists...");
   return axios.get("https://api.spotify.com/v1/me/playlists", { headers });
 };
 
@@ -61,11 +60,11 @@ export const createPlaylist = (term) => {
   let playlistName = "Your Top Tracks";
 
   if (term === "short_term") {
-    playlistName += " (Last Month)";
+    playlistName += " • Last Month";
   } else if (term === "medium_term") {
-    playlistName += " (Past 6 Months)";
+    playlistName += " • Past 6 Months";
   } else {
-    playlistName += " (All Time)";
+    playlistName += " • All Time";
   }
   console.log(url);
 

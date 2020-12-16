@@ -16,7 +16,10 @@ app.use(cors());
 
 let storedState = "";
 
-app.get("/login", function (req, res) {
+/**
+ * Endpoint handling user login request received from the frontend
+ */
+app.get("/login", (req, res) => {
   const scopes =
     "user-read-private user-read-email user-top-read playlist-modify-private playlist-modify-public";
   const stateString = generateRandomStateString(25);
@@ -33,7 +36,13 @@ app.get("/login", function (req, res) {
   );
 });
 
-app.get("/callback", function (req, res) {
+/**
+ * Endpoint handles callback from API which returns a code and state
+ * once user has been properly authenticated. Responds the api using code and state to get 
+ * access/refresh tokens
+ * 
+ */
+app.get("/callback", (req, res) => {
   const code = req.query.code || null;
   const state = req.query.state || null;
 
@@ -81,6 +90,15 @@ app.get("/callback", function (req, res) {
   }
 });
 
+/**
+ * Handles extracting refresh token once initial access token expires
+ */
+app.get("/refresh", (req, res) => {});
+
+/**
+ * Returns a random string to be used as the state given the length of desired string
+ * @param {*} length 
+ */
 const generateRandomStateString = function (length) {
   let result = "";
   let characters =

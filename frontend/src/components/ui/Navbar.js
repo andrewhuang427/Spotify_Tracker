@@ -7,7 +7,7 @@ import { FaBars } from "react-icons/fa";
 
 const Nav = styled.div`
   background-color: #303030;
-  border-bottom: 1px solid #555555;
+  border-bottom: 1px solid #222222;
   position: fixed;
   top: 0;
   left: 0;
