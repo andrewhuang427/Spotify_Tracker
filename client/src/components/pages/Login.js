@@ -54,7 +54,7 @@ const LoginForm = styled.div`
 `;
 
 function Login() {
-  const loginURI = "http://localhost:8000/login";
+  const loginURI = "https://track-my-spotify.herokuapp.com/login";
 
   return (
     <LoginBody>
