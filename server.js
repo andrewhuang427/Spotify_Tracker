@@ -31,7 +31,7 @@ app.get("/login", (req, res) => {
       response_type: "code",
       client_id: clientId,
       scope: scopes,
-      redirect_uri: redirectURI,
+      redirect_uri: "https://track-my-spotify.herokuapp.com/callback",
       state: stateString,
     })}`
   );
@@ -50,7 +50,7 @@ app.get("/callback", (req, res) => {
   if (state === storedState) {
     const requestBody = {
       grant_type: "authorization_code",
-      redirect_uri: redirectURI,
+      redirect_uri: "https://track-my-spotify.herokuapp.com/callback",
       code: code,
     };
 
@@ -73,7 +73,7 @@ app.get("/callback", (req, res) => {
         const access_token = response.data.access_token;
         const refresh_token = response.data.refresh_token;
         res.redirect(
-          reactURI +
+          "https://track-my-spotify.herokuapp.com" +
             "/" +
             querystring.stringify({
               access_token: access_token,
