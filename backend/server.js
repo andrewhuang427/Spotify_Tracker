@@ -2,6 +2,7 @@ const axios = require("axios");
 const express = require("express");
 const querystring = require("querystring");
 const cors = require("cors");
+const path = require("path");
 
 require("dotenv").config();
 
@@ -38,9 +39,9 @@ app.get("/login", (req, res) => {
 
 /**
  * Endpoint handles callback from API which returns a code and state
- * once user has been properly authenticated. Responds the api using code and state to get 
+ * once user has been properly authenticated. Responds to api using code and state to get
  * access/refresh tokens
- * 
+ *
  */
 app.get("/callback", (req, res) => {
   const code = req.query.code || null;
@@ -68,7 +69,7 @@ app.get("/callback", (req, res) => {
         querystring.stringify(requestBody),
         config
       )
-      .then(function (response) {
+      .then((response) => {
         const access_token = response.data.access_token;
         const refresh_token = response.data.refresh_token;
         res.redirect(
@@ -97,9 +98,8 @@ app.get("/refresh", (req, res) => {});
 
 /**
  * Returns a random string to be used as the state given the length of desired string
- * @param {*} length 
  */
-const generateRandomStateString = function (length) {
+const generateRandomStateString = (length) => {
   let result = "";
   let characters =
     "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
@@ -109,7 +109,15 @@ const generateRandomStateString = function (length) {
   return result;
 };
 
-const PORT = 8000 || process.env.PORT;
+if (process.env.NODE_ENV === "production") {
+  app.use(express.static("../client/build"));
+
+  app.get("*", (req, res) => {
+    res.sendFile(path.join(__dirname, "..", "client", "build", "index.html"));
+  });
+}
+
+const PORT = process.env.PORT || 8000;
 
 app.listen(PORT, () => {
   console.log("Server running on http://localhost:" + PORT);

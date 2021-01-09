@@ -17,7 +17,6 @@
 5 - Application is mobile friendly <br />
 5 - Application displays individual album covers and playlist covers <br />
 
-
 ### Best Practices (5 points)
 3 - Code is readable and well formatted <br />
 2 - All pages pass the html validator <br />

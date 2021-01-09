@@ -16,13 +16,11 @@ export const getUser = () => {
 let USER_ID = "";
 const getUserId = async () => {
   const user = await getUser();
-  console.log(user);
   USER_ID = user.data.id;
 };
 getUserId();
 
 export const getPlaylists = () => {
-  console.log("getting playlists...");
   return axios.get("https://api.spotify.com/v1/me/playlists", { headers });
 };
 
@@ -66,7 +64,6 @@ export const createPlaylist = (term) => {
   } else {
     playlistName += " • All Time";
   }
-  console.log(url);
 
   const data = {
     name: playlistName,

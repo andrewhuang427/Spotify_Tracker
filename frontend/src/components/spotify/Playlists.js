@@ -27,7 +27,6 @@ function Playlists() {
   useEffect(() => {
     const fetchPlaylists = async () => {
       const response = await getPlaylists();
-      console.log(response.data.items);
       setPlaylists(response.data.items);
     };
     fetchPlaylists();
@@ -52,7 +51,7 @@ function Playlists() {
         <Slider>
           {playlists.map((playlist, index) => {
             return (
-              <Slide index={index}>
+              <Slide key={index}>
                 <PlaylistCard playlist={playlist} />
               </Slide>
             );

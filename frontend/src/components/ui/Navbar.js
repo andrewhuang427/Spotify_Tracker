@@ -115,7 +115,6 @@ function Navbar() {
             <ListItem isActive={currentPage === item.title} key={index}>
               <NavLink
                 to={item.path}
-                isActive={currentPage === item.title}
                 key={index}
                 onClick={() => setCurrentPage(item.title)}
               >

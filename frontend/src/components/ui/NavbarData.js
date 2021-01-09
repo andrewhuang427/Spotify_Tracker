@@ -11,8 +11,4 @@ export const NavbarData = [
     title: "Top Artists",
     path: "/artists",
   },
-  {
-    title: "Log Out",
-    path: "/logout",
-  },
 ];
